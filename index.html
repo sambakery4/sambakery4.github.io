@@ -3,245 +3,381 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Moroccan Sweets Gallery</title>
+  <title>Sam Cuisine Bakery | Moroccan Sweets Shop</title>
 
   <style>
     * {
       box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    :root {
-      --bg: #120b08;
-      --card: rgba(255,255,255,0.08);
-      --gold: #f4c56a;
-      --brown: #7a3e1d;
-      --cream: #fff4e8;
-      --text: #fdf7f0;
-      --muted: #ead9c7;
+      scroll-behavior: smooth;
     }
 
     body {
+      margin: 0;
       font-family: Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, #5a2d16 0%, transparent 30%),
-        radial-gradient(circle at top right, #8b4b24 0%, transparent 30%),
-        linear-gradient(135deg, #1a110d, #2a1710, #120b08);
-      color: var(--text);
-      min-height: 100vh;
+      background: #fffaf4;
+      color: #3f2a1d;
     }
 
-    header {
-      padding: 70px 20px 40px;
-      text-align: center;
-      position: relative;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
-    .hero-box {
-      max-width: 1100px;
+    /* NAVBAR */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: #ffffffee;
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #ecd8c4;
+    }
+
+    .nav-container {
+      max-width: 1200px;
       margin: auto;
-      padding: 35px 25px;
-      border: 1px solid rgba(255,255,255,0.12);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: #8b4a24;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      font-size: 0.95rem;
+      color: #6f4a35;
+    }
+
+    .nav-links a:hover {
+      color: #c7772c;
+    }
+
+    /* HERO */
+    header {
+      background: linear-gradient(135deg, rgba(139,74,36,0.82), rgba(214,154,88,0.72)),
+      url("https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=1400") center/cover no-repeat;
+      color: white;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: auto;
+      padding: 90px 20px 100px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .hero-text h1 {
+      font-size: 3.4rem;
+      margin: 0 0 18px;
+      line-height: 1.1;
+    }
+
+    .hero-text p {
+      font-size: 1.08rem;
+      line-height: 1.8;
+      max-width: 650px;
+      margin-bottom: 28px;
+      color: #fff5eb;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: bold;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: #fff0de;
+      color: #8b4a24;
+    }
+
+    .btn-primary:hover {
+      background: #ffffff;
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      border: 2px solid rgba(255,255,255,0.75);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.12);
+      transform: translateY(-2px);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.25);
       border-radius: 24px;
-      background: rgba(255,255,255,0.07);
-      backdrop-filter: blur(10px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+      padding: 24px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.2);
     }
 
-    header h1 {
-      font-size: 3rem;
-      color: var(--gold);
-      margin-bottom: 12px;
-      letter-spacing: 1px;
-      text-shadow: 0 0 18px rgba(244,197,106,0.22);
+    .hero-card h3 {
+      margin-top: 0;
+      font-size: 1.5rem;
     }
 
-    header p {
-      max-width: 760px;
-      margin: 0 auto 24px;
-      font-size: 1.05rem;
+    .hero-card p {
       line-height: 1.7;
-      color: var(--muted);
+      color: #fff7f0;
+    }
+
+    /* SEARCH */
+    .search-section {
+      max-width: 1200px;
+      margin: -30px auto 0;
+      padding: 0 20px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .search-box {
+      background: white;
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: 0 14px 28px rgba(0,0,0,0.08);
+      border: 1px solid #efdfd0;
     }
 
     .search-box input {
       width: 100%;
-      max-width: 420px;
-      padding: 14px 18px;
-      border: none;
-      border-radius: 999px;
-      outline: none;
+      padding: 16px 18px;
+      border: 1px solid #dcbfa7;
+      border-radius: 14px;
       font-size: 1rem;
-      background: white;
-      color: #222;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+      outline: none;
     }
 
-    .section-title {
-      max-width: 1200px;
-      margin: 0 auto 18px;
-      padding: 0 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .section-title h2 {
-      color: var(--gold);
-      font-size: 1.8rem;
-    }
-
-    .section-title p {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .featured-wrap {
-      max-width: 1200px;
-      margin: 0 auto 50px;
-      padding: 0 20px;
-    }
-
-    .featured-row {
-      display: flex;
-      gap: 20px;
-      overflow-x: auto;
-      padding-bottom: 10px;
-      scroll-behavior: smooth;
-    }
-
-    .featured-row::-webkit-scrollbar {
-      height: 10px;
-    }
-
-    .featured-row::-webkit-scrollbar-thumb {
-      background: rgba(244,197,106,0.5);
-      border-radius: 999px;
-    }
-
-    .featured-card {
-      min-width: 320px;
-      max-width: 320px;
-      border-radius: 22px;
-      overflow: hidden;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.1);
-      box-shadow: 0 14px 30px rgba(0,0,0,0.28);
-      transition: transform 0.25s ease;
-    }
-
-    .featured-card:hover {
-      transform: translateY(-8px);
-    }
-
-    .featured-card img {
-      width: 100%;
-      height: 210px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .featured-content {
-      padding: 18px;
-    }
-
-    .badge {
-      display: inline-block;
-      background: linear-gradient(90deg, #f4c56a, #e79a4d);
-      color: #2d160a;
-      font-weight: bold;
-      font-size: 0.75rem;
-      padding: 7px 10px;
-      border-radius: 999px;
-      margin-bottom: 12px;
-    }
-
-    .featured-card h3,
-    .card h3 {
-      margin-bottom: 10px;
-      color: #fff3d9;
-    }
-
-    .featured-card p,
-    .card p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
-
-    .container {
+    /* GENERAL SECTION */
+    section {
       max-width: 1200px;
       margin: auto;
-      padding: 0 20px 60px;
+      padding: 70px 20px 20px;
     }
 
+    .section-heading {
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .section-heading h2 {
+      margin: 0 0 10px;
+      color: #8b4a24;
+      font-size: 2.2rem;
+    }
+
+    .section-heading p {
+      margin: 0;
+      color: #7b5f4d;
+      line-height: 1.7;
+    }
+
+    /* FEATURE STRIP */
+    .feature-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .feature-box {
+      background: #fff;
+      border: 1px solid #f0dfd0;
+      border-radius: 18px;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.05);
+    }
+
+    .feature-box h3 {
+      margin: 0 0 8px;
+      color: #8b4a24;
+      font-size: 1.05rem;
+    }
+
+    .feature-box p {
+      margin: 0;
+      color: #6f5b4d;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    /* PRODUCT GRID */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 22px;
+      gap: 24px;
     }
 
     .card {
-      background: var(--card);
-      border: 1px solid rgba(255,255,255,0.1);
+      background: #fff;
       border-radius: 20px;
       overflow: hidden;
-      box-shadow: 0 12px 28px rgba(0,0,0,0.22);
-      transition: transform 0.25s ease, box-shadow 0.25s ease;
-      backdrop-filter: blur(8px);
+      border: 1px solid #f0dfd0;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.07);
+      transition: 0.25s ease;
     }
 
     .card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 18px 34px rgba(0,0,0,0.32);
+      transform: translateY(-6px);
+      box-shadow: 0 16px 32px rgba(0,0,0,0.1);
     }
 
     .card img {
       width: 100%;
-      height: 190px;
+      height: 220px;
       object-fit: cover;
       display: block;
+      background: #f3e2d2;
     }
 
     .card-content {
       padding: 18px;
     }
 
-    .mini-tag {
+    .tag {
       display: inline-block;
-      background: rgba(244,197,106,0.14);
-      border: 1px solid rgba(244,197,106,0.4);
-      color: var(--gold);
-      font-size: 0.75rem;
-      padding: 6px 10px;
+      background: #fde8cf;
+      color: #8b4a24;
+      padding: 7px 11px;
       border-radius: 999px;
-      margin-bottom: 10px;
+      font-size: 0.75rem;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: #6e381b;
+      font-size: 1.25rem;
+    }
+
+    .card p {
+      margin: 0 0 14px;
+      line-height: 1.65;
+      color: #6e5a4b;
+      font-size: 0.95rem;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .price {
+      font-size: 1.1rem;
+      font-weight: bold;
+      color: #b56322;
+    }
+
+    .buy-btn {
+      background: #8b4a24;
+      color: white;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .buy-btn:hover {
+      background: #a5572a;
+    }
+
+    /* ABOUT / CONTACT */
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .info-box {
+      background: white;
+      border: 1px solid #f0dfd0;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 10px 24px rgba(0,0,0,0.05);
+    }
+
+    .info-box h3 {
+      margin-top: 0;
+      color: #8b4a24;
+      font-size: 1.5rem;
+    }
+
+    .info-box p {
+      color: #6d594b;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .contact-list {
+      line-height: 2;
+      color: #6d594b;
     }
 
     footer {
-      margin-top: 30px;
+      margin-top: 60px;
+      background: #8b4a24;
+      color: white;
       text-align: center;
-      padding: 25px 20px;
-      color: #f3dfc5;
-      background: rgba(0,0,0,0.25);
-      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 24px 20px;
     }
 
-    @media (max-width: 700px) {
-      header h1 {
-        font-size: 2.2rem;
+    @media (max-width: 950px) {
+      .hero {
+        grid-template-columns: 1fr;
       }
 
-      .featured-card {
-        min-width: 280px;
-        max-width: 280px;
+      .feature-strip {
+        grid-template-columns: repeat(2, 1fr);
       }
 
-      .section-title {
-        flex-direction: column;
-        align-items: flex-start;
+      .two-column {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .hero-text h1 {
+        font-size: 2.4rem;
+      }
+
+      .feature-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-container {
+        justify-content: center;
+      }
+
+      .nav-links {
+        justify-content: center;
       }
     }
   </style>
@@ -254,7 +390,7 @@
       for (let i = 0; i < cards.length; i++) {
         let text = cards[i].innerText.toLowerCase();
         if (text.includes(input)) {
-          cards[i].style.display = "";
+          cards[i].style.display = "block";
         } else {
           cards[i].style.display = "none";
         }
@@ -264,193 +400,321 @@
 </head>
 <body>
 
-  <header>
-    <div class="hero-box">
-      <h1>Moroccan Sweets Gallery</h1>
-      <p>
-        A richer and more stylish collection of Moroccan pastries, cookies, and honey desserts.
-        Browse traditional favorites with photos, polished descriptions, and a more modern bakery-style design.
-      </p>
+  <nav>
+    <div class="nav-container">
+      <div class="logo">Sam Cuisine Bakery</div>
+      <div class="nav-links">
+        <a href="#shop">Shop</a>
+        <a href="#featured">Featured</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-      <div class="search-box">
-        <input
-          type="text"
-          id="search"
-          onkeyup="searchSweets()"
-          placeholder="Search Moroccan sweets..."
-        />
+  <header>
+    <div class="hero">
+      <div class="hero-text">
+        <h1>Moroccan Bakery Shop</h1>
+        <p>
+          Welcome to Sam Cuisine Bakery, your online Moroccan sweets shop featuring honey pastries,
+          almond cookies, tea-time biscuits, and traditional bakery favorites made to look warm,
+          elegant, and ready to order.
+        </p>
+        <div class="hero-buttons">
+          <a href="#shop" class="btn btn-primary">Shop Now</a>
+          <a href="#about" class="btn btn-secondary">Learn More</a>
+        </div>
+      </div>
+
+      <div class="hero-card">
+        <h3>Freshly Styled Bakery Display</h3>
+        <p>
+          Explore classic sweets like Chebakia, Kaab El Ghazal, Briouat, Fekkas, and more.
+          This page is designed like a bakery storefront with featured items, product cards,
+          prices, and sections that feel like a real dessert shop.
+        </p>
       </div>
     </div>
   </header>
 
-  <div class="section-title">
-    <h2>Featured Sweets</h2>
-    <p>Scroll sideways to explore the highlights</p>
+  <div class="search-section">
+    <div class="search-box">
+      <input
+        type="text"
+        id="search"
+        onkeyup="searchSweets()"
+        placeholder="Search bakery items..."
+      />
+    </div>
   </div>
 
-  <section class="featured-wrap">
-    <div class="featured-row">
-
-      <div class="featured-card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?moroccan,honey,pastry" alt="Chebakia">
-        <div class="featured-content">
-          <span class="badge">Ramadan Favorite</span>
-          <h3>Chebakia</h3>
-          <p>Chebakia is a flower-shaped Moroccan cookie fried until crisp, then coated in honey and sprinkled with sesame seeds. It is especially popular during Ramadan and is one of the most recognizable Moroccan sweets.</p>
-        </div>
+  <section>
+    <div class="feature-strip">
+      <div class="feature-box">
+        <h3>Traditional Recipes</h3>
+        <p>Inspired by classic Moroccan bakery sweets and festive desserts.</p>
       </div>
-
-      <div class="featured-card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?almond,pastry,cookies" alt="Kaab El Ghazal">
-        <div class="featured-content">
-          <span class="badge">Elegant Pastry</span>
-          <h3>Kaab El Ghazal</h3>
-          <p>Known as gazelle horns, this pastry has a delicate outer shell with a fragrant almond filling flavored with orange blossom water. It is one of the most refined and elegant desserts in Moroccan baking.</p>
-        </div>
+      <div class="feature-box">
+        <h3>Bakery Shop Style</h3>
+        <p>Clean storefront layout with featured items and dessert cards.</p>
       </div>
-
-      <div class="featured-card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?biscotti,nuts,cookies" alt="Fekkas">
-        <div class="featured-content">
-          <span class="badge">Tea Time Classic</span>
-          <h3>Fekkas</h3>
-          <p>Fekkas is a crunchy twice-baked Moroccan biscuit often made with almonds, raisins, sesame, or chocolate. It is perfect with tea or coffee and gives the page a bakery display feel.</p>
-        </div>
+      <div class="feature-box">
+        <h3>Gift Box Friendly</h3>
+        <p>Perfect assortment for tea trays, celebrations, and sharing.</p>
       </div>
-
-      <div class="featured-card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?donut,doughnut,pastry" alt="Sfenj">
-        <div class="featured-content">
-          <span class="badge">Street Sweet</span>
-          <h3>Sfenj</h3>
-          <p>Sfenj is a Moroccan donut with a crisp outside and airy inside. It is often enjoyed warm, plain, or lightly sweetened, and is one of the most comforting traditional treats.</p>
-        </div>
+      <div class="feature-box">
+        <h3>Searchable Menu</h3>
+        <p>Quickly find your favorite pastry, cookie, or sweet treat.</p>
       </div>
-
     </div>
   </section>
 
-  <div class="section-title">
-    <h2>Sweet Collection</h2>
-    <p>Modern layout with photo cards instead of one long plain list</p>
-  </div>
-
-  <div class="container">
-    <div class="grid">
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?fried,pastry,honey" alt="Briouat">
-        <div class="card-content">
-          <span class="mini-tag">Honey Pastry</span>
-          <h3>Briouat</h3>
-          <p>Briouat is a crisp triangular pastry usually filled with sweet almond paste, fried until golden, and glazed with honey. It is rich, festive, and very common on Moroccan dessert trays.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?sesame,dessert,cookie" alt="Sellou">
-        <div class="card-content">
-          <span class="mini-tag">Roasted Sweet</span>
-          <h3>Sellou (Sfouf)</h3>
-          <p>Sellou is made from toasted flour, almonds, sesame, butter, and warm spices. It has a rich crumbly texture and is deeply connected with Ramadan and celebration tables.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?crumbly,cookies" alt="Ghriba Bahla">
-        <div class="card-content">
-          <span class="mini-tag">Classic Cookie</span>
-          <h3>Ghriba Bahla</h3>
-          <p>Ghriba Bahla is a cracked Moroccan cookie with a rustic look and soft texture. It is simple but loved for its buttery feel and homemade bakery charm.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?coconut,cookies,dessert" alt="Ghriba Coconut">
-        <div class="card-content">
-          <span class="mini-tag">Coconut Sweet</span>
-          <h3>Ghriba Coconut</h3>
-          <p>This coconut version of ghriba has a sweet, tender, and slightly chewy center. It brings a softer bakery-style variation to traditional Moroccan cookies.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?almond,cookies,dessert" alt="Ghriba Almond">
-        <div class="card-content">
-          <span class="mini-tag">Almond Cookie</span>
-          <h3>Ghriba Almond</h3>
-          <p>Ghriba Almond is a soft cookie made with ground almonds and sugar. It is delicate, rich, and one of the most popular sweets served with Moroccan tea.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?date,pastry,dessert" alt="Makrout">
-        <div class="card-content">
-          <span class="mini-tag">Date Filled</span>
-          <h3>Makrout</h3>
-          <p>Makrout is a semolina pastry filled with date paste, then baked or fried and coated in honey. Its rich filling and grainy exterior make it especially satisfying.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?pancakes,honey,dessert" alt="Baghrir">
-        <div class="card-content">
-          <span class="mini-tag">Honey Pancake</span>
-          <h3>Baghrir</h3>
-          <p>Baghrir is known as the thousand-hole pancake because of its spongy surface. It is often served warm with melted butter and honey for a soft and comforting sweet dish.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?flatbread,honey,pastry" alt="Msemen with Honey">
-        <div class="card-content">
-          <span class="mini-tag">Layered Favorite</span>
-          <h3>Msemen with Honey</h3>
-          <p>Msemen is a flaky layered pancake or flatbread. Sweetened with honey, it becomes a rich breakfast or dessert with a buttery texture and beautiful folded layers.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?semolina,cake,dessert" alt="Harcha Sweet">
-        <div class="card-content">
-          <span class="mini-tag">Semolina Cake</span>
-          <h3>Harcha Sweet</h3>
-          <p>Sweet harcha is a semolina griddle cake with a golden crust and crumbly inside. It is simple, warm, and perfect with honey, butter, or jam.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?cream,pastry,dessert" alt="Jawhara">
-        <div class="card-content">
-          <span class="mini-tag">Luxury Dessert</span>
-          <h3>Jawhara</h3>
-          <p>Jawhara is a royal dessert made with crisp pastry layers, cream filling, and almond garnish. It feels elegant, rich, and more dramatic than an everyday cookie display.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?fried,spiral,dessert" alt="Zlabia">
-        <div class="card-content">
-          <span class="mini-tag">Syrup Spiral</span>
-          <h3>Zlabia</h3>
-          <p>Zlabia is a bright, glossy fried sweet soaked in syrup or honey. Its spiral look makes it visually striking and perfect for a flashier dessert gallery.</p>
-        </div>
-      </div>
-
-      <div class="card sweet-card">
-        <img src="https://source.unsplash.com/600x400/?sweet,bread,brioche" alt="Krachel">
-        <div class="card-content">
-          <span class="mini-tag">Sweet Bread</span>
-          <h3>Krachel</h3>
-          <p>Krachel is a soft Moroccan brioche flavored with anise, sesame, and orange blossom. It is light, fragrant, and works well in a bakery-style layout.</p>
-        </div>
-      </div>
-
+  <section id="featured">
+    <div class="section-heading">
+      <h2>Featured Best Sellers</h2>
+      <p>Some of the most popular sweets in the bakery collection.</p>
     </div>
-  </div>
+
+    <div class="grid">
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/291528/pexels-photo-291528.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Chebakia">
+        <div class="card-content">
+          <span class="tag">Best Seller</span>
+          <h3>Chebakia</h3>
+          <p>Flower-shaped Moroccan honey cookie coated with sesame seeds. A signature Ramadan and celebration favorite with a rich golden finish.</p>
+          <div class="price-row">
+            <span class="price">$12.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/3026808/pexels-photo-3026808.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Kaab El Ghazal">
+        <div class="card-content">
+          <span class="tag">Elegant Favorite</span>
+          <h3>Kaab El Ghazal</h3>
+          <p>Gazelle horn pastry filled with fragrant almond paste and orange blossom flavor. Delicate, refined, and perfect for tea service.</p>
+          <div class="price-row">
+            <span class="price">$15.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/230325/pexels-photo-230325.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Fekkas">
+        <div class="card-content">
+          <span class="tag">Tea Time</span>
+          <h3>Fekkas</h3>
+          <p>Crunchy twice-baked Moroccan biscuit with a bakery-style presentation, ideal for serving with coffee or mint tea.</p>
+          <div class="price-row">
+            <span class="price">$10.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="shop">
+    <div class="section-heading">
+      <h2>Bakery Shop Menu</h2>
+      <p>Browse the sweets collection like an online bakery menu.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/3992206/pexels-photo-3992206.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Briouat">
+        <div class="card-content">
+          <span class="tag">Honey Pastry</span>
+          <h3>Briouat</h3>
+          <p>Crisp triangular pastry filled with sweet almond paste and finished with warm honey for a rich festive flavor.</p>
+          <div class="price-row">
+            <span class="price">$13.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/4110541/pexels-photo-4110541.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sellou">
+        <div class="card-content">
+          <span class="tag">Celebration Sweet</span>
+          <h3>Sellou (Sfouf)</h3>
+          <p>Roasted flour dessert mixed with almonds, sesame, butter, and spices. Rich, crumbly, and deeply traditional.</p>
+          <div class="price-row">
+            <span class="price">$11.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/6941010/pexels-photo-6941010.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ghriba Bahla">
+        <div class="card-content">
+          <span class="tag">Classic Cookie</span>
+          <h3>Ghriba Bahla</h3>
+          <p>Traditional cracked Moroccan cookie with a soft interior and rustic homemade bakery character.</p>
+          <div class="price-row">
+            <span class="price">$9.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/5848496/pexels-photo-5848496.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Makrout">
+        <div class="card-content">
+          <span class="tag">Date Filled</span>
+          <h3>Makrout</h3>
+          <p>Semolina pastry filled with date paste, lightly crisp outside and sweet, rich inside with a honey finish.</p>
+          <div class="price-row">
+            <span class="price">$12.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/4686814/pexels-photo-4686814.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Baghrir">
+        <div class="card-content">
+          <span class="tag">Breakfast Sweet</span>
+          <h3>Baghrir</h3>
+          <p>The famous thousand-hole pancake served warm with butter and honey, soft and airy with a comforting taste.</p>
+          <div class="price-row">
+            <span class="price">$8.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/6605308/pexels-photo-6605308.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Msemen">
+        <div class="card-content">
+          <span class="tag">Layered Pastry</span>
+          <h3>Msemen with Honey</h3>
+          <p>Flaky layered Moroccan flatbread sweetened with honey, perfect for breakfast platters and bakery brunch menus.</p>
+          <div class="price-row">
+            <span class="price">$9.50</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/7525163/pexels-photo-7525163.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Harcha">
+        <div class="card-content">
+          <span class="tag">Semolina Cake</span>
+          <h3>Harcha Sweet</h3>
+          <p>Golden semolina griddle cake with a crumbly texture, delicious with honey, jam, or butter.</p>
+          <div class="price-row">
+            <span class="price">$8.50</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/4686828/pexels-photo-4686828.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Sfenj">
+        <div class="card-content">
+          <span class="tag">Street Favorite</span>
+          <h3>Sfenj</h3>
+          <p>Traditional Moroccan donut with a crisp outer layer and airy middle, best served warm and fresh.</p>
+          <div class="price-row">
+            <span class="price">$7.50</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/3776943/pexels-photo-3776943.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Jawhara">
+        <div class="card-content">
+          <span class="tag">Luxury Dessert</span>
+          <h3>Jawhara</h3>
+          <p>Layered pastry dessert with creamy filling and almond garnish, styled like a premium bakery showcase sweet.</p>
+          <div class="price-row">
+            <span class="price">$16.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/6941037/pexels-photo-6941037.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Almond Cookies">
+        <div class="card-content">
+          <span class="tag">Cookie Box</span>
+          <h3>Ghriba Almond</h3>
+          <p>Soft almond-based Moroccan cookie with a delicate bite, ideal for bakery assortments and dessert gift boxes.</p>
+          <div class="price-row">
+            <span class="price">$10.50</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/5848501/pexels-photo-5848501.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Coconut Cookies">
+        <div class="card-content">
+          <span class="tag">Coconut Cookie</span>
+          <h3>Ghriba Coconut</h3>
+          <p>Sweet coconut Moroccan cookie with a soft center and bakery-style finish, perfect for a mixed sweets tray.</p>
+          <div class="price-row">
+            <span class="price">$10.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card sweet-card">
+        <img src="https://images.pexels.com/photos/6605320/pexels-photo-6605320.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Krachel">
+        <div class="card-content">
+          <span class="tag">Sweet Bread</span>
+          <h3>Krachel</h3>
+          <p>Soft Moroccan brioche flavored with anise, sesame, and orange blossom, great for breakfast and bakery bundles.</p>
+          <div class="price-row">
+            <span class="price">$9.00</span>
+            <a href="#contact" class="buy-btn">Order Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="two-column">
+      <div class="info-box">
+        <h3>About Our Bakery</h3>
+        <p>
+          Sam Cuisine Bakery is a Moroccan sweets shop concept built to showcase traditional pastries,
+          cookies, and desserts in a clean, elegant online storefront.
+        </p>
+        <p>
+          The focus is on warm bakery colors, product cards, featured selections, and a menu layout
+          that feels more like a shop than a plain list of desserts.
+        </p>
+      </div>
+
+      <div class="info-box" id="contact">
+        <h3>Contact & Orders</h3>
+        <div class="contact-list">
+          <strong>Phone:</strong> (555) 123-4567<br>
+          <strong>Email:</strong> orders@samcuisinebakery.com<br>
+          <strong>Location:</strong> Hoboken, NJ<br>
+          <strong>Hours:</strong> Mon - Sat, 9:00 AM - 7:00 PM
+        </div>
+        <p style="margin-top:16px;">
+          For now, the order buttons can link here. Later, you can connect them to WhatsApp,
+          an order form, or a checkout page.
+        </p>
+      </div>
+    </div>
+  </section>
 
   <footer>
-    Moroccan Sweets Gallery • Flashier layout • Searchable dessert cards • Bakery-style presentation
+    Sam Cuisine Bakery • Moroccan Sweets Shop • Fresh pastries, cookies, and dessert favorites
   </footer>
 
 </body>

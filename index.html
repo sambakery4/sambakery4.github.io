@@ -1,173 +1,474 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Moroccan Sweets Collection</title>
 
-<title>Moroccan Sweets Library</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-<style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f8f3ee;
+      color: #2f241f;
+    }
 
-body{
-font-family:Arial, sans-serif;
-margin:0;
-background:#f4efe9;
-}
+    header {
+      background: linear-gradient(rgba(122, 62, 29, 0.85), rgba(122, 62, 29, 0.85)),
+        url("images/header.jpg") center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 70px 20px 50px;
+    }
 
-header{
-background:#7a3e1d;
-color:white;
-padding:30px;
-text-align:center;
-}
+    header h1 {
+      margin: 0;
+      font-size: 2.8rem;
+      letter-spacing: 1px;
+    }
 
-header h1{
-margin:0;
-}
+    header p {
+      margin-top: 12px;
+      font-size: 1.1rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      line-height: 1.6;
+    }
 
-.search-box{
-margin-top:15px;
-}
+    .search-box {
+      margin-top: 25px;
+    }
 
-.search-box input{
-padding:10px;
-width:260px;
-border-radius:5px;
-border:none;
-}
+    .search-box input {
+      width: 100%;
+      max-width: 380px;
+      padding: 14px 16px;
+      border: none;
+      border-radius: 999px;
+      font-size: 1rem;
+      outline: none;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    }
 
-.container{
-max-width:1200px;
-margin:auto;
-padding:30px;
-}
+    .intro {
+      max-width: 1100px;
+      margin: 40px auto 10px;
+      padding: 0 20px;
+      text-align: center;
+    }
 
-.grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
-}
+    .intro h2 {
+      color: #7a3e1d;
+      margin-bottom: 10px;
+      font-size: 2rem;
+    }
 
-.card{
-background:white;
-padding:20px;
-border-radius:10px;
-box-shadow:0 4px 10px rgba(0,0,0,0.1);
-transition:0.2s;
-}
+    .intro p {
+      color: #5c4a42;
+      max-width: 800px;
+      margin: auto;
+      line-height: 1.7;
+    }
 
-.card:hover{
-transform:scale(1.05);
-}
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 30px 20px 60px;
+    }
 
-.card h3{
-margin-top:0;
-color:#7a3e1d;
-}
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
 
-footer{
-background:#7a3e1d;
-color:white;
-text-align:center;
-padding:15px;
-margin-top:40px;
-}
+    .card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
 
-</style>
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.12);
+    }
 
-<script>
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
 
-function searchSweets() {
+    .card-content {
+      padding: 18px;
+    }
 
-let input = document.getElementById("search").value.toLowerCase();
+    .card h3 {
+      margin: 0 0 10px;
+      color: #7a3e1d;
+      font-size: 1.2rem;
+    }
 
-let cards = document.getElementsByClassName("card");
+    .card p {
+      margin: 0;
+      line-height: 1.6;
+      color: #5a4a43;
+      font-size: 0.96rem;
+    }
 
-for (let i = 0; i < cards.length; i++) {
+    .tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      background: #f3e2d4;
+      color: #7a3e1d;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: bold;
+    }
 
-let title = cards[i].innerText.toLowerCase();
+    footer {
+      background: #7a3e1d;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.95rem;
+    }
 
-if (title.includes(input)) {
-cards[i].style.display = "block";
-} else {
-cards[i].style.display = "none";
-}
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2rem;
+      }
 
-}
+      .intro h2 {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 
-}
+  <script>
+    function searchSweets() {
+      let input = document.getElementById("search").value.toLowerCase();
+      let cards = document.getElementsByClassName("card");
 
-</script>
-
+      for (let i = 0; i < cards.length; i++) {
+        let title = cards[i].innerText.toLowerCase();
+        if (title.includes(input)) {
+          cards[i].style.display = "flex";
+        } else {
+          cards[i].style.display = "none";
+        }
+      }
+    }
+  </script>
 </head>
 
 <body>
+  <header>
+    <h1>Moroccan Sweets Collection</h1>
+    <p>
+      Discover the beauty of traditional Moroccan pastries, cookies, and festive desserts,
+      from honey-soaked classics to almond-filled specialties served across celebrations and family gatherings.
+    </p>
 
-<header>
+    <div class="search-box">
+      <input
+        type="text"
+        id="search"
+        onkeyup="searchSweets()"
+        placeholder="Search Moroccan sweets..."
+      />
+    </div>
+  </header>
 
-<h1>Moroccan Sweets Collection</h1>
-<p>Explore Traditional Moroccan Desserts</p>
+  <section class="intro">
+    <h2>Traditional Moroccan Dessert Library</h2>
+    <p>
+      Moroccan sweets are known for their rich use of honey, almonds, sesame, orange blossom water,
+      dates, and warm spices. This collection highlights some of the most loved pastries and cookies
+      found in Moroccan homes, bakeries, and Ramadan tables.
+    </p>
+  </section>
 
-<div class="search-box">
-<input type="text" id="search" onkeyup="searchSweets()" placeholder="Search Moroccan sweets...">
-</div>
+  <div class="container">
+    <div class="grid">
 
-</header>
+      <div class="card">
+        <img src="images/chebakia.jpg" alt="Chebakia">
+        <div class="card-content">
+          <span class="tag">Honey & Sesame</span>
+          <h3>Chebakia</h3>
+          <p>Chebakia is one of Morocco’s most iconic sweets, especially popular during Ramadan. It is a flower-shaped fried cookie flavored with sesame, anise, cinnamon, and orange blossom water, then coated in honey for a glossy finish.</p>
+        </div>
+      </div>
 
-<div class="container">
+      <div class="card">
+        <img src="images/briouat.jpg" alt="Briouat">
+        <div class="card-content">
+          <span class="tag">Almond Pastry</span>
+          <h3>Briouat</h3>
+          <p>Briouat is a crisp triangular pastry often filled with sweet almond paste. The pastry is fried until golden and finished with warm honey, creating a rich and festive dessert commonly served on special occasions.</p>
+        </div>
+      </div>
 
-<div class="grid">
+      <div class="card">
+        <img src="images/kaab-el-ghazal.jpg" alt="Kaab El Ghazal">
+        <div class="card-content">
+          <span class="tag">Gazelle Horns</span>
+          <h3>Kaab El Ghazal</h3>
+          <p>Kaab El Ghazal, also called gazelle horns, is a refined Moroccan pastry made with a delicate outer dough and a fragrant almond filling scented with orange blossom water. Its crescent shape makes it one of the most elegant sweets in Moroccan baking.</p>
+        </div>
+      </div>
 
-<div class="card"><h3>Chebakia</h3><p>Honey sesame Ramadan cookie.</p></div>
-<div class="card"><h3>Briouat</h3><p>Fried pastry filled with almond paste.</p></div>
-<div class="card"><h3>Kaab El Ghazal</h3><p>Gazelle horn almond pastry.</p></div>
-<div class="card"><h3>Sellou (Sfouf)</h3><p>Roasted flour sweet with almonds and sesame.</p></div>
-<div class="card"><h3>Ghriba Bahla</h3><p>Traditional cracked Moroccan cookie.</p></div>
-<div class="card"><h3>Ghriba Coconut</h3><p>Coconut crumbly cookies.</p></div>
-<div class="card"><h3>Ghriba Almond</h3><p>Soft almond cookies.</p></div>
-<div class="card"><h3>Makrout</h3><p>Date-filled semolina pastries.</p></div>
-<div class="card"><h3>Fekkas</h3><p>Moroccan biscotti with nuts.</p></div>
-<div class="card"><h3>Baghrir</h3><p>Moroccan thousand-hole pancakes.</p></div>
-<div class="card"><h3>Msemen with Honey</h3><p>Layered Moroccan pancake.</p></div>
-<div class="card"><h3>Harcha Sweet</h3><p>Semolina griddle cake.</p></div>
-<div class="card"><h3>Basbousa</h3><p>Semolina cake soaked in syrup.</p></div>
-<div class="card"><h3>Jawhara</h3><p>Royal almond and milk pastry dessert.</p></div>
-<div class="card"><h3>Zlabia</h3><p>Deep fried honey soaked spirals.</p></div>
-<div class="card"><h3>Sfenj</h3><p>Moroccan donut.</p></div>
-<div class="card"><h3>Krachel</h3><p>Sweet Moroccan brioche.</p></div>
-<div class="card"><h3>Beghrir Cake</h3><p>Stacked honey pancake dessert.</p></div>
-<div class="card"><h3>Rghayef with Honey</h3><p>Moroccan flat pastry with honey.</p></div>
-<div class="card"><h3>Almond Briouat with Honey</h3><p>Ramadan almond triangles.</p></div>
-<div class="card"><h3>Fried Almond Cookies</h3><p>Crispy almond sweets.</p></div>
-<div class="card"><h3>Chocolate Fekkas</h3><p>Biscotti with chocolate.</p></div>
-<div class="card"><h3>Date Briouat</h3><p>Pastry filled with dates.</p></div>
-<div class="card"><h3>Walnut Ghriba</h3><p>Nutty crumbly cookie.</p></div>
-<div class="card"><h3>Pistachio Moroccan Cookies</h3><p>Modern pistachio variation.</p></div>
-<div class="card"><h3>Orange Blossom Cookies</h3><p>Floral Moroccan sweets.</p></div>
-<div class="card"><h3>Honey Almond Balls</h3><p>Small festive sweets.</p></div>
-<div class="card"><h3>Sesame Honey Cookies</h3><p>Crunchy sesame dessert.</p></div>
-<div class="card"><h3>Mini Chebakia</h3><p>Small honey flower cookies.</p></div>
-<div class="card"><h3>Coconut Briouat</h3><p>Coconut-filled pastry.</p></div>
-<div class="card"><h3>Chocolate Briouat</h3><p>Chocolate filled fried pastry.</p></div>
-<div class="card"><h3>Semolina Almond Cake</h3><p>Moist almond cake.</p></div>
-<div class="card"><h3>Honey Date Rolls</h3><p>Sweet date pastry rolls.</p></div>
-<div class="card"><h3>Moroccan Millefeuille</h3><p>Layered pastry dessert.</p></div>
-<div class="card"><h3>Moroccan Almond Macaroons</h3><p>Soft almond cookies.</p></div>
-<div class="card"><h3>Moroccan Chocolate Cookies</h3><p>Modern bakery style cookies.</p></div>
-<div class="card"><h3>Caramel Sesame Bars</h3><p>Sticky sesame sweet bars.</p></div>
-<div class="card"><h3>Stuffed Date Cookies</h3><p>Date filled pastries.</p></div>
-<div class="card"><h3>Ramadan Honey Balls</h3><p>Fried honey soaked balls.</p></div>
-<div class="card"><h3>Moroccan Festive Almond Cakes</h3><p>Special celebration desserts.</p></div>
+      <div class="card">
+        <img src="images/sellou.jpg" alt="Sellou">
+        <div class="card-content">
+          <span class="tag">Roasted Flour Sweet</span>
+          <h3>Sellou (Sfouf)</h3>
+          <p>Sellou is a rich Moroccan sweet made from toasted flour, ground almonds, sesame seeds, butter, and warm spices. It has a soft, crumbly texture and is especially associated with Ramadan and celebrations.</p>
+        </div>
+      </div>
 
-</div>
+      <div class="card">
+        <img src="images/ghriba-bahla.jpg" alt="Ghriba Bahla">
+        <div class="card-content">
+          <span class="tag">Classic Cookie</span>
+          <h3>Ghriba Bahla</h3>
+          <p>Ghriba Bahla is a rustic Moroccan cookie known for its cracked top and tender, melt-in-the-mouth texture. It is simple, traditional, and loved for its buttery flavor and home-style appearance.</p>
+        </div>
+      </div>
 
-</div>
+      <div class="card">
+        <img src="images/ghriba-coconut.jpg" alt="Ghriba Coconut">
+        <div class="card-content">
+          <span class="tag">Coconut Cookie</span>
+          <h3>Ghriba Coconut</h3>
+          <p>This variation of ghriba combines the familiar crumbly texture of Moroccan cookies with sweet shredded coconut. It is light, slightly chewy inside, and often dusted or decorated for a bakery-style finish.</p>
+        </div>
+      </div>
 
-<footer>
+      <div class="card">
+        <img src="images/ghriba-almond.jpg" alt="Ghriba Almond">
+        <div class="card-content">
+          <span class="tag">Almond Cookie</span>
+          <h3>Ghriba Almond</h3>
+          <p>Ghriba Almond is a soft Moroccan cookie made with ground almonds and sugar, often producing a delicate interior with a slightly crisp surface. It is one of the most beloved tea-time sweets in Moroccan homes.</p>
+        </div>
+      </div>
 
-<p>Moroccan Sweets Library • Traditional Moroccan Dessert Collection</p>
+      <div class="card">
+        <img src="images/makrout.jpg" alt="Makrout">
+        <div class="card-content">
+          <span class="tag">Date-Filled</span>
+          <h3>Makrout</h3>
+          <p>Makrout is a semolina-based pastry filled with sweet date paste and commonly fried or baked before being dipped in honey. Its combination of grainy semolina and soft date filling gives it a rich and distinctive texture.</p>
+        </div>
+      </div>
 
-</footer>
+      <div class="card">
+        <img src="images/fekkas.jpg" alt="Fekkas">
+        <div class="card-content">
+          <span class="tag">Moroccan Biscotti</span>
+          <h3>Fekkas</h3>
+          <p>Fekkas is a twice-baked Moroccan biscuit similar to biscotti. It is usually filled with almonds, sesame seeds, raisins, or chocolate, and is especially popular with coffee or Moroccan mint tea.</p>
+        </div>
+      </div>
 
+      <div class="card">
+        <img src="images/baghrir.jpg" alt="Baghrir">
+        <div class="card-content">
+          <span class="tag">Honey Pancake</span>
+          <h3>Baghrir</h3>
+          <p>Baghrir is often called the thousand-hole pancake because of its many tiny bubbles on the surface. It is soft, spongy, and commonly served warm with melted butter and honey.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/msemen.jpg" alt="Msemen with Honey">
+        <div class="card-content">
+          <span class="tag">Layered Flatbread</span>
+          <h3>Msemen with Honey</h3>
+          <p>Msemen is a flaky, layered Moroccan pancake or flatbread. When served sweet with honey or sugar, it becomes a comforting breakfast or dessert item with a chewy and buttery texture.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/harcha.jpg" alt="Harcha Sweet">
+        <div class="card-content">
+          <span class="tag">Semolina Cake</span>
+          <h3>Harcha Sweet</h3>
+          <p>Harcha is a griddled semolina bread with a slightly crumbly texture. Sweet versions are often served with honey, jam, or butter and are appreciated for their golden crust and comforting flavor.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/basbousa.jpg" alt="Basbousa">
+        <div class="card-content">
+          <span class="tag">Syrup Cake</span>
+          <h3>Basbousa</h3>
+          <p>Basbousa is a moist semolina cake soaked in sweet syrup. Though enjoyed across many regions, it is also appreciated in Moroccan dessert spreads for its tender texture and rich sweetness.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/jawhara.jpg" alt="Jawhara">
+        <div class="card-content">
+          <span class="tag">Royal Dessert</span>
+          <h3>Jawhara</h3>
+          <p>Jawhara is a luxurious Moroccan dessert made with crispy pastry layers, creamy milk filling, and almond garnish. It has a rich, elegant presentation and is often served at celebrations and formal gatherings.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/zlabia.jpg" alt="Zlabia">
+        <div class="card-content">
+          <span class="tag">Honey Spiral</span>
+          <h3>Zlabia</h3>
+          <p>Zlabia is a deep-fried spiral or twisted sweet soaked in syrup or honey. It has a glossy surface, a chewy interior, and a festive appearance that makes it stand out on dessert tables.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/sfenj.jpg" alt="Sfenj">
+        <div class="card-content">
+          <span class="tag">Moroccan Donut</span>
+          <h3>Sfenj</h3>
+          <p>Sfenj is a traditional Moroccan donut known for its airy interior and crisp outer layer. It is usually enjoyed plain, with sugar, or dipped in honey, especially as a warm street-food style treat.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/krachel.jpg" alt="Krachel">
+        <div class="card-content">
+          <span class="tag">Sweet Bread</span>
+          <h3>Krachel</h3>
+          <p>Krachel is a sweet Moroccan brioche flavored with anise, sesame, and orange blossom. Its soft bread-like texture makes it a favorite for breakfast, tea, or light dessert platters.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/almond-briouat.jpg" alt="Almond Briouat with Honey">
+        <div class="card-content">
+          <span class="tag">Festive Favorite</span>
+          <h3>Almond Briouat with Honey</h3>
+          <p>This sweet version of briouat features a rich almond filling wrapped in thin pastry, fried until crisp, and coated in honey. It is a classic holiday and Ramadan dessert with a glossy, bakery-style finish.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/chocolate-fekkas.jpg" alt="Chocolate Fekkas">
+        <div class="card-content">
+          <span class="tag">Modern Twist</span>
+          <h3>Chocolate Fekkas</h3>
+          <p>Chocolate Fekkas is a modern adaptation of the traditional Moroccan biscuit. It combines the crunch of classic fekkas with cocoa or chocolate pieces for a richer, more contemporary dessert option.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/date-briouat.jpg" alt="Date Briouat">
+        <div class="card-content">
+          <span class="tag">Date Pastry</span>
+          <h3>Date Briouat</h3>
+          <p>Date Briouat replaces almond filling with soft, naturally sweet dates. The result is a warm, caramel-like pastry that pairs especially well with Moroccan tea and festive dessert assortments.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/pistachio-cookies.jpg" alt="Pistachio Moroccan Cookies">
+        <div class="card-content">
+          <span class="tag">Bakery Style</span>
+          <h3>Pistachio Moroccan Cookies</h3>
+          <p>Pistachio Moroccan cookies bring a colorful and slightly modern look to the dessert table. They usually feature a tender cookie base with crushed pistachios for extra flavor, color, and texture.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/orange-blossom-cookies.jpg" alt="Orange Blossom Cookies">
+        <div class="card-content">
+          <span class="tag">Floral Flavor</span>
+          <h3>Orange Blossom Cookies</h3>
+          <p>Orange blossom cookies highlight one of the signature aromas of Moroccan baking. They are delicate, fragrant, and often served at tea gatherings where subtle floral flavor is appreciated.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/honey-almond-balls.jpg" alt="Honey Almond Balls">
+        <div class="card-content">
+          <span class="tag">Festive Sweet</span>
+          <h3>Honey Almond Balls</h3>
+          <p>Honey almond balls are small celebratory sweets made with nuts and sweet glaze, often presented in decorative paper cups. They are popular for parties, Eid, and formal dessert trays.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/sesame-honey-cookies.jpg" alt="Sesame Honey Cookies">
+        <div class="card-content">
+          <span class="tag">Crunchy & Sweet</span>
+          <h3>Sesame Honey Cookies</h3>
+          <p>These cookies combine the nutty depth of sesame with the sweetness of honey. They are often crisp, golden, and especially appealing for people who enjoy traditional North African dessert flavors.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/coconut-briouat.jpg" alt="Coconut Briouat">
+        <div class="card-content">
+          <span class="tag">Coconut Filling</span>
+          <h3>Coconut Briouat</h3>
+          <p>Coconut Briouat offers a tropical variation on the classic pastry. The sweet coconut filling contrasts with the crisp outer shell, creating a dessert that feels both traditional and slightly modern.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/chocolate-briouat.jpg" alt="Chocolate Briouat">
+        <div class="card-content">
+          <span class="tag">Chocolate Pastry</span>
+          <h3>Chocolate Briouat</h3>
+          <p>Chocolate Briouat is a creative twist on the classic Moroccan pastry. It keeps the crisp pastry shell while introducing a smooth chocolate center, making it especially appealing in modern bakeries.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/stuffed-date-cookies.jpg" alt="Stuffed Date Cookies">
+        <div class="card-content">
+          <span class="tag">Date Filled</span>
+          <h3>Stuffed Date Cookies</h3>
+          <p>Stuffed date cookies are soft pastries filled with sweet date paste, often shaped decoratively and baked until lightly golden. They are a common feature in homemade Moroccan dessert assortments.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/almond-macaroons.jpg" alt="Moroccan Almond Macaroons">
+        <div class="card-content">
+          <span class="tag">Soft Almond Sweet</span>
+          <h3>Moroccan Almond Macaroons</h3>
+          <p>Moroccan almond macaroons are chewy and rich, with a sweet almond base that gives them a delicate texture. They are often decorated simply but stand out for their flavor and softness.</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <img src="images/chocolate-cookies.jpg" alt="Moroccan Chocolate Cookies">
+        <div class="card-content">
+          <span class="tag">Contemporary Favorite</span>
+          <h3>Moroccan Chocolate Cookies</h3>
+          <p>Moroccan chocolate cookies reflect the modern side of Moroccan home baking, combining traditional hospitality with contemporary ingredients. They are often served alongside more classic almond and sesame sweets.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer>
+    <p>Moroccan Sweets Collection • Traditional Pastries, Cookies, and Celebration Desserts</p>
+  </footer>
 </body>
 </html>
